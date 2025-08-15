@@ -18,7 +18,7 @@ public class PoltronaController {
 
     // Listar poltronas por voo
     @GetMapping("/voo/{vooId}")
-    public String listarPorVoo(@PathVariable Long vooId, Model model) {
+    public String listarPorVoo(@PathVariable("vooId") Long vooId, Model model) {
         model.addAttribute("vooId", vooId);
         model.addAttribute("poltronas", service.listarPorVoo(vooId));
         return "poltronas";
@@ -26,7 +26,7 @@ public class PoltronaController {
 
     // Reservar uma poltrona
     @PostMapping("/reservar/{id}")
-    public String reservar(@PathVariable Long id, @RequestParam Long vooId) {
+    public String reservar(@PathVariable("id") Long id, @RequestParam("vooId") Long vooId) {
         service.reservar(id);
         return "redirect:/poltronas/voo/" + vooId;
     }
