@@ -18,7 +18,7 @@ public class PoltronaController {
 
     // Listar poltronas por voo
     @GetMapping("/voo/{vooId}")
-    public String listarPorVoo(@PathVariable Long vooId, Model model) {
+    public String listarPorVoo(@PathVariable("vooId") Long vooId, Model model) {
         model.addAttribute("vooId", vooId);
         model.addAttribute("poltronas", service.listarPorVoo(vooId));
         return "poltronas";
