@@ -26,7 +26,7 @@ public class PoltronaController {
 
     // Reservar uma poltrona
     @PostMapping("/reservar/{id}")
-    public String reservar(@PathVariable Long id, @RequestParam Long vooId) {
+    public String reservar(@PathVariable("id") Long id, @RequestParam("vooId") Long vooId) {
         service.reservar(id);
         return "redirect:/poltronas/voo/" + vooId;
     }
