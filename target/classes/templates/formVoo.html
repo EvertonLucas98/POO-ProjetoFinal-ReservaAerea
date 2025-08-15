@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Voo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+    <h1>Novo Voo</h1>
+    <form th:action="@{/voos}" th:object="${voo}" method="post">
+        <div class="mb-3">
+            <label class="form-label">Origem</label>
+            <input type="text" class="form-control" th:field="*{origem}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Destino</label>
+            <input type="text" class="form-control" th:field="*{destino}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Data/Hora</label>
+            <input type="text" class="form-control" th:field="*{dataHora}" placeholder="dd/MM/yyyy HH:mm" required>
+        </div>
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <a href="/voos" class="btn btn-secondary">Cancelar</a>
+    </form>
+</body>
+</html>
