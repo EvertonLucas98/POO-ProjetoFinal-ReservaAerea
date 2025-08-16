@@ -37,6 +37,12 @@ public class ClienteService {
         return repository.save(cliente);
     }
 
+    // Autenticar Email e senha
+    public Cliente autenticar(String email, String senha) {
+        return repository.findByEmailAndSenha(email, senha)
+            .orElse(null);
+    }
+    
     // Excluir um cliente
     public void excluir(Long id) {
         repository.deleteById(id);
