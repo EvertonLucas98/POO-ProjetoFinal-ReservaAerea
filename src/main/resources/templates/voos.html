@@ -26,7 +26,7 @@
                 <td th:text="${voo.destino}"></td>
                 <td th:text="${voo.dataHora}"></td>
                 <td class="d-flex gap-2">
-                    <a th:href="@{/poltronas/voo/{id}(id=${voo.id})}" class="btn btn-success btn-sm">Poltronas</a>
+                    <a th:href="@{/login(vooId=${voo.id})}" class="btn btn-success btn-sm">Poltronas</a>
                     <a th:href="@{/voos/excluir/{id}(id=${voo.id})}" class="btn btn-danger btn-sm">Excluir</a>
                 </td>
             </tr>
