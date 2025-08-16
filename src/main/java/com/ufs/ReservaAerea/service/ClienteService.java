@@ -2,6 +2,10 @@ package com.ufs.ReservaAerea.service;
 
 import com.ufs.ReservaAerea.model.Cliente;
 import com.ufs.ReservaAerea.repository.ClienteRepository;
+import com.ufs.ReservaAerea.service.exceptions.CamposObrigatoriosException;
+import com.ufs.ReservaAerea.service.exceptions.CredenciaisInvalidasException;
+import com.ufs.ReservaAerea.service.exceptions.FormatoInvalidoException;
+
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -39,9 +43,21 @@ public class ClienteService {
 
     // Autenticar Email e senha
     public Cliente autenticar(String email, String senha) {
-        return repository.findByEmailAndSenha(email, senha)
-            .orElse(null);
+
+    if (email == null || email.isBlank() || senha == null || senha.isBlank()) {
+            throw new CamposObrigatoriosException("Preencha todos os campos.");
+        }
+
+    if (!email.matches("^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$")) {
+        throw new FormatoInvalidoException("Formato de email inválido.");
     }
+    
+    Cliente cliente = repository.findByEmail(email);
+        if (cliente == null || !cliente.getSenha().equals(senha)) {
+            throw new CredenciaisInvalidasException("Email ou senha inválidos.");
+        }
+    return cliente;
+}
     
     // Excluir um cliente
     public void excluir(Long id) {
