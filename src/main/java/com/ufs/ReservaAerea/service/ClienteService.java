@@ -4,7 +4,6 @@ import com.ufs.ReservaAerea.model.Cliente;
 import com.ufs.ReservaAerea.repository.ClienteRepository;
 import com.ufs.ReservaAerea.service.exceptions.CamposObrigatoriosException;
 import com.ufs.ReservaAerea.service.exceptions.CredenciaisInvalidasException;
-import com.ufs.ReservaAerea.service.exceptions.FormatoInvalidoException;
 
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -38,6 +37,15 @@ public class ClienteService {
 
     // Salvar um novo cliente
     public Cliente salvar(Cliente cliente) {
+        if (repository.existsByEmail(cliente.getEmail())) {
+            throw new CredenciaisInvalidasException("Já existe um cliente cadastrado com este e-mail!");
+        }
+        if (cliente.getEmail() == null || cliente.getEmail().isBlank() || cliente.getSenha() == null || cliente.getSenha().isBlank()) {
+            throw new CamposObrigatoriosException("Preencha todos os campos obrigatórios.");
+        }
+        if (!cliente.getEmail().matches("^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$")) {
+            throw new IllegalArgumentException("Formato de email inválido.");
+        }
         return repository.save(cliente);
     }
 
@@ -49,7 +57,7 @@ public class ClienteService {
         }
 
     if (!email.matches("^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$")) {
-        throw new FormatoInvalidoException("Formato de email inválido.");
+        throw new IllegalArgumentException("Formato de email inválido.");
     }
     
     Cliente cliente = repository.findByEmail(email);

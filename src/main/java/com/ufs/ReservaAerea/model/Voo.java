@@ -17,7 +17,7 @@ public class Voo {
     private String dataHora;
 
     @OneToMany(mappedBy = "voo", cascade = CascadeType.ALL)
-    private List<Poltrona> poltronas;
+    private List<Poltrona> poltronas=new ArrayList<>();
 
     // Getters e Setters
     public Long getId() {

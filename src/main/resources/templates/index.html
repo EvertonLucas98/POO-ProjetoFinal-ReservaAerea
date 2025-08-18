@@ -7,11 +7,27 @@
 </head>
 <body class="container mt-4">
     <h1 class="mb-4">Sistema de Reserva Aérea</h1>
-    <div class="list-group">
+
+   
+    <div th:if="${logado == true}" class="alert alert-info mb-3">
+        Bem-vindo, <span th:text="${nomeCliente}"></span>!
+        <a href="/logout" class="btn btn-sm btn-warning float-end">Sair</a>
+    </div>
+
+    
+    <div class="list-group mb-3">
         <a href="/voos" class="list-group-item list-group-item-action">Gerenciar Voos</a>
         <a href="/clientes" class="list-group-item list-group-item-action">Gerenciar Clientes</a>
     </div>
-    <div class="alert alert-info mt-4">
+
+    
+    <div th:if="${logado == false}" class="text-center mb-4">
+        <a href="/login" class="btn btn-primary me-2">Login</a>
+        <a href="/clientes/novo" class="btn btn-outline-primary">Cadastre-se</a>
+    </div>
+
+    
+    <div class="alert alert-info">
         Para selecionar poltronas, acesse <strong>Gerenciar Voos</strong> e clique em <em>Poltronas</em> no voo desejado.
     </div>
 </body>

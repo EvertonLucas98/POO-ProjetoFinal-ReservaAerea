@@ -8,19 +8,27 @@
 <body class="container mt-4">
     <h1>Novo Cliente</h1>
 
+    <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
+
     <form th:action="@{/clientes}" th:object="${cliente}" method="post">
         <div class="mb-3">
             <label class="form-label">Nome</label>
             <input type="text" class="form-control" th:field="*{nome}" required>
+            <div th:if="${#fields.hasErrors('nome')}" class="text-danger" th:errors="*{nome}"></div>
         </div>
+        
         <div class="mb-3">
             <label class="form-label">Email</label>
             <input type="email" class="form-control" th:field="*{email}" required>
+            <div th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></div>
         </div>
+        
         <div class="mb-3">
             <label class="form-label">Senha</label>
             <input type="password" class="form-control" th:field="*{senha}" required>
+            <div th:if="${#fields.hasErrors('senha')}" class="text-danger" th:errors="*{senha}"></div>
         </div>
+        
         <button type="submit" class="btn btn-success">Salvar</button>
         <a href="/clientes" class="btn btn-secondary">Cancelar</a>
     </form>
