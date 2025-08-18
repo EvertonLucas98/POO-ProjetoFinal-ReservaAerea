@@ -2,6 +2,7 @@ package com.ufs.ReservaAerea.controller;
 
 import com.ufs.ReservaAerea.model.Voo;
 import com.ufs.ReservaAerea.service.VooService;
+import com.ufs.ReservaAerea.service.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,15 +13,18 @@ import org.springframework.web.bind.annotation.*;
 public class VooController {
 
     private final VooService service;
+    private final LoginService loginService;
 
-    public VooController(VooService service) {
+    public VooController(VooService service, LoginService loginService) {
         this.service = service;
+        this.loginService = LoginService.getInstance(); // instância do serviço de login
     }
 
     // Listar todos os voos
     @GetMapping
     public String listar(Model model) {
         model.addAttribute("voos", service.listarTodos());
+        model.addAttribute("logado", loginService.estaLogado()); // verifica se o cliente está logado
         return "voos";
     }
 
