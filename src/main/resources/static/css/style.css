@@ -1,0 +1,143 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --cor1: #5E92BF;
+    --cor2: #6F9ABF;
+    --cor3: #B0C6D9;
+    --cor4: #D0D3D9;
+    --cor5: #A6937C;
+
+    --font-logo: "Lobster", sans-serif;
+}
+
+header {
+    height: 50vh;
+    width: 100vw;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    background-image: url(../img/img02-full.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: inset 150px 150px 100px rgba(0, 0, 0, 0.8);
+}
+
+header h1 {
+    width: 50vw;
+    height: 10vh;
+    align-items: center;
+    font-size: 2.5em;
+    margin-top: 4em;
+    color: aliceblue;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+div.container-header {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+}
+
+
+div#logoNav {
+    width: 100%;
+    height: 8%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav {
+    width: 60vw;
+    height: 60%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+nav > a {
+    font-size: 1.2em;
+    color: aliceblue;
+    z-index: 1;
+}
+
+div#logoNav > a {
+    height: 60%;
+    width: 20vw;
+    display: flex;
+    justify-content: center;
+    color: aliceblue;
+    font-family: var(--font-logo);
+    font-size: 1.5em;
+    font-weight: bolder;
+    font-style: normal;
+    z-index: 1;
+}
+
+div#card {
+    width: 60vw;
+    height: 5vh;
+    position: absolute;
+    display: flex;
+    top: 40%;
+    left: 20%;
+    background-color: var(--cor3);
+    border-radius: 20px 20px 0px 0px;
+    z-index: 1;
+}
+
+div#card h2 {
+    font-size: 1.5em;
+    color: var(--cor1);
+    margin: 1em 0;
+}
+
+div#card ul {
+    display: flex;
+}
+
+div#card li {
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+div#card-interno {
+    width: 60vw;
+    height: 19vh;
+    position: absolute;
+    top: 45%;
+    left: 20%;
+    background-color: var(--cor4);
+    border-radius: 0px 0px 20px 20px;
+    z-index: 1;
+}
+
+main {
+    height: 47vh;
+    width: 100vw;
+    background-color: var(--cor5);
+    display: flex;
+    flex-flow: row wrap;
+}
+
+footer {
+    background-color: var(--cor2);
+    height: 3vh;
+    width: 100vw;
+}
