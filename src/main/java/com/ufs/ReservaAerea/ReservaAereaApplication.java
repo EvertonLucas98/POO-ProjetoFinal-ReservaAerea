@@ -9,6 +9,7 @@ import com.ufs.ReservaAerea.model.Voo;
 import com.ufs.ReservaAerea.model.Poltrona;
 import com.ufs.ReservaAerea.repository.VooRepository;
 import com.ufs.ReservaAerea.repository.PoltronaRepository;
+import com.ufs.ReservaAerea.service.ClienteService;
 
 @SpringBootApplication
 public class ReservaAereaApplication {
@@ -19,8 +20,9 @@ public class ReservaAereaApplication {
 
     // Carregando dados iniciais
     @Bean
-    CommandLineRunner loadData(VooRepository vooRepository, PoltronaRepository poltronaRepository) {
+    CommandLineRunner loadData(VooRepository vooRepository, PoltronaRepository poltronaRepository, ClienteService clienteService) {
         return args -> {
+            clienteService.carregarClientesDoArquivo();
             // Verificando se já existem dados cadastrados
             if (vooRepository.count() == 0) {
                 // Criando o primeiro voo
