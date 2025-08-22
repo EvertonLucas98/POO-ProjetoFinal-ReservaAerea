@@ -12,11 +12,11 @@
 }
 
 :root {
-    --cor1: #5E92BF;
+    --cor1: #4885bb;
     --cor2: #6F9ABF;
     --cor3: #B0C6D9;
     --cor4: #D0D3D9;
-    --cor5: #A6937C;
+    --cor5: #aaa5a0;
 
     --font-logo: "Lobster", sans-serif;
 }
@@ -35,18 +35,17 @@ header {
 }
 
 header h1 {
-    width: 50vw;
-    height: 10vh;
+    width: 60%;
+    height: 40%;
     align-items: center;
-    font-size: 2.5em;
-    margin-top: 4em;
+    font-size: 2em;
+    margin: 12% 7.5% 0% 7.5%;
     color: aliceblue;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 div.container-header {
     width: 70%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     margin: 1em;
@@ -71,13 +70,13 @@ nav {
     align-items: center;
 }
 
-nav > a {
+nav>a {
     font-size: 1.2em;
     color: aliceblue;
     z-index: 1;
 }
 
-div#logoNav > a {
+div#logoNav>a {
     height: 60%;
     width: 20vw;
     display: flex;
@@ -97,7 +96,7 @@ div#card {
     display: flex;
     top: 40%;
     left: 20%;
-    background-color: var(--cor3);
+    background-color: var(--cor1);
     border-radius: 20px 20px 0px 0px;
     z-index: 1;
 }
@@ -128,16 +127,72 @@ div#card-interno {
     z-index: 1;
 }
 
+.option {
+    display: flex;
+    align-items: center;
+    margin: 0em 2em;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Esconde o radio padrão */
+.option input {
+    display: none;
+}
+
+/* Círculo personalizado */
+.checkmark {
+    height: 20px;
+    width: 20px;
+    border: 2px solid var(--cor2);
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    transition: 0.3s;
+}
+
+/* Quando selecionado */
+.option input:checked~.checkmark {
+    background: var(--cor1);
+    border-color: aliceblue;
+}
+
+/* Bolinha dentro quando marcado */
+.option input:checked~.checkmark::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+}
+
 main {
     height: 47vh;
     width: 100vw;
     background-color: var(--cor5);
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column nowrap;
+    padding: 10% 20%;
 }
 
 footer {
-    background-color: var(--cor2);
     height: 3vh;
     width: 100vw;
+    background-color: var(--cor2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer>p {
+    font-size: 1em;
+    margin: 0;
+}
+
+a {
+    color: aliceblue;
+    text-decoration: none;
 }
