@@ -5,15 +5,57 @@
     <title>Mapa de Poltronas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .seat { width: 64px; height: 48px; }
+        .seat { 
+            width: 64px; 
+            height: 48px; 
+            margin: 3px;
+            transition: all 0.2s ease;
+        }
         .welcome-title { color: #2c3e50; }
+        
+        /* quando selecionado fica azul */
+        .btn-check:checked + .btn-success {
+            background-color: #007bff !important;
+            border-color: #007bff !important;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+        }
+        
+        /* Efeito hover para poltronas disponíveis */
+        .btn-success:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Efeito hover para poltronas selecionadas */
+        .btn-check:checked + .btn-success:hover {
+            background-color: #0069d9 !important;
+            border-color: #0062cc !important;
+        }
+        
+        /* Legenda */
+        .legenda {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .item-legenda {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .cor-legenda {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body class="container mt-4">
     
-    <h1 class="welcome-title mb-3" th:text="${logado} ? 'Olá ' + ${nomeCliente} + ', selecione sua poltrona' : 'Selecione sua poltrona'"></h1>
+    <h1 class="welcome-title mb-3" th:text="${logado} ? 'Olá ' + ${nomeCliente} + ', selecione suas poltronas' : 'Selecione suas poltronas'"></h1>
 
-    
     <div th:if="${logado}" class="alert alert-info mb-3">
         Logado como: <span th:text="${loginManager.getClienteLogado().email}"></span>
     </div>
@@ -21,23 +63,67 @@
         Você precisa <a th:href="@{/login(vooId=${vooId})}" class="alert-link">fazer login</a> para reservar.
     </div>
 
-   
-    <div class="row g-2">
-        <div th:each="poltrona : ${poltronas}" class="col-auto">
-            <form th:action="@{/poltronas/reservar/{id}(id=${poltrona.id})}" method="post">
-                <input type="hidden" name="vooId" th:value="${vooId}" />
-                <button class="btn seat"
-                        th:classappend="${poltrona.reservada} ? 'btn-danger' : 'btn-success'"
-                        th:text="${poltrona.numero}"
-                        th:disabled="${poltrona.reservada or not logado}">
-                </button>
-            </form>
+    <!-- Legenda -->
+    <div class="legenda">
+        <div class="item-legenda">
+            <div class="cor-legenda bg-success"></div>
+            <span>Disponível</span>
+        </div>
+        <div class="item-legenda">
+            <div class="cor-legenda bg-primary"></div>
+            <span>Selecionada</span>
+        </div>
+        <div class="item-legenda">
+            <div class="cor-legenda bg-danger"></div>
+            <span>Ocupada</span>
         </div>
     </div>
 
-    
-    <div class="mt-3">
-        <a th:href="@{/voos}" class="btn btn-secondary">Voltar aos voos</a>
+    <!-- Formulário principal para seleção múltipla -->
+    <form th:action="@{/poltronas/selecionar}" method="post">
+        <input type="hidden" name="vooId" th:value="${vooId}" />
+        
+        <div class="mb-3">
+            <label class="form-label"><strong>Selecione as poltronas:</strong></label>
+            <div class="text-muted">Clique nas poltronas verdes para selecionar</div>
+        </div>
+
+        <!-- Mapa de poltronas com checkboxes -->
+        <div class="row g-1">
+            <div th:each="poltrona : ${poltronas}" class="col-auto">
+                <input type="checkbox" 
+                       name="poltronasSelecionadas" 
+                       th:value="${poltrona.id}"
+                       th:id="${'poltrona_' + poltrona.id}"
+                       th:disabled="${poltrona.reservada}"
+                       class="btn-check" autocomplete="off">
+                
+                <label th:for="${'poltrona_' + poltrona.id}"
+                       th:class="${poltrona.reservada} ? 
+                           'btn btn-danger seat' : 
+                           'btn btn-success seat'"
+                       th:text="${poltrona.numero}">
+                </label>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary" th:disabled="${not logado}">
+                Reservar Poltronas Selecionadas
+            </button>
+            <a th:href="@{/voos}" class="btn btn-secondary">Voltar aos voos</a>
+        </div>
+    </form>
+
+    <!-- Instruções -->
+    <div class="mt-3 alert alert-light">
+        <small>
+            💡 <strong>Como usar:</strong><br>
+            • Clique nas poltronas <span class="text-success">verdes</span> para selecionar<br>
+            • As selecionadas ficam <span class="text-primary">azuis</span><br>
+            • Poltronas <span class="text-danger">vermelhas</span> já estão ocupadas<br>
+            • Clique em "Reservar Poltronas Selecionadas" quando terminar
+        </small>
     </div>
 </body>
 </html>

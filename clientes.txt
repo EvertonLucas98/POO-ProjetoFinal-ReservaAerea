@@ -2,3 +2,6 @@
 2|Lila|lilabemerguy@gmail.com|1234
 3|Dassu|dassu@gmail.com|oioi
 4|Jorge|jorgejorge@gmail.com|jorge
+5|Fabio|fabio@gmail.com|fabio123
+6|Lu|Lu@gmail.com|lu1234
+7|euTeste|eu@gamil.com|1234

@@ -56,7 +56,8 @@
             opções.</p>
         <div th:if="${logado == true}" class="alert alert-info mb-3">
             Bem-vindo, <span th:text="${nomeCliente}"></span>!
-            <a href="/logout" class="btn btn-sm btn-warning float-end">Sair</a>
+            <a href="/logout" class="btn btn-sm btn-warning float-end ms-2">Sair</a>
+            <a href="/reservas" class="btn btn-sm btn-warning float-end">Minhas Reservas</a>
         </div>
     </main>
 
