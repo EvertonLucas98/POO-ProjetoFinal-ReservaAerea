@@ -102,11 +102,22 @@ nav {
 }
 
 /* Estilo do contêiner de autenticação */
-#auth-container {
+.auth-container {
+    width: 20%;
+    height: 100%;
     display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    align-items: center;
+    padding: .5em;
+    border-radius: 5px;
 }
 
-#auth-container>a {
+.auth-container p {
+    margin: 0;
+}
+
+#logout-button {
     font-size: 1em;
     color: var(--cor4);
     text-decoration: none;
