@@ -4,8 +4,9 @@ import jakarta.persistence.*;
 
 @Entity
 public class Cliente {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Gerando valor automático para o ID
     private Long id;
 
     private String nome;

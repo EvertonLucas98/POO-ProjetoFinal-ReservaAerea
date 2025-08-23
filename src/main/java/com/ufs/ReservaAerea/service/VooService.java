@@ -62,9 +62,4 @@ public class VooService {
         return novoVoo;
     }
 
-    // Exclui um voo pelo ID
-    public void excluir(Long id) {
-        vooRepository.deleteById(id);
-    }
-
 }

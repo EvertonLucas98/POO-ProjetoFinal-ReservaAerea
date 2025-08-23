@@ -39,7 +39,7 @@ public class ClienteController {
     public String salvar(@ModelAttribute Cliente cliente, Model model) {
         try {
             service.salvar(cliente);
-            return "redirect:/clientes";
+            return "redirect:/voos";
         } catch (CamposObrigatoriosException | CredenciaisInvalidasException e) {
             model.addAttribute("erro", e.getMessage());
             model.addAttribute("cliente", cliente);
@@ -53,14 +53,6 @@ public class ClienteController {
             model.addAttribute("cliente", cliente);
             return "formCliente";
         }
-    }
-    
-
-    // Excluir um cliente
-    @GetMapping("/excluir/{id}")
-    public String excluir(@PathVariable Long id) {
-        service.excluir(id);
-        return "redirect:/clientes";
     }
     
 }

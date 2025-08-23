@@ -55,8 +55,8 @@
         <p>Está pensando em viajar para algum lugar em breve? Para ajudar você a começar o processo, aqui estão algumas
             opções.</p>
         <div th:if="${logado == true}" class="alert alert-info mb-3">
-            Bem-vindo, <span th:text="${nomeCliente}"></span>!
-            <a href="/logout" class="btn btn-sm btn-warning float-end ms-2">Sair</a>
+            <p>Bem-vindo, <span th:text="${nomeCliente}"></span>!</p>
+            <a href="/logout" class="btn btn-sm btn-warning float-end">Sair</a>
             <a href="/reservas" class="btn btn-sm btn-warning float-end">Minhas Reservas</a>
         </div>
     </main>

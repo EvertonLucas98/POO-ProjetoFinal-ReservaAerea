@@ -3,36 +3,38 @@ package com.ufs.ReservaAerea.service;
 import org.springframework.stereotype.Service;
 
 import com.ufs.ReservaAerea.model.Cliente;
+
 @Service
 public class LoginService {
-    //Singleton(classe que só pode ser instanciada uma vez)
+    // Singleton(classe que só pode ser instanciada uma vez)
     private static final LoginService INSTANCE = new LoginService();
     private Cliente clienteLogado;
 
-    //construtor privado para evitar instanciamento externo
-    private LoginService() {}
+    // construtor privado para evitar instanciamento externo
+    private LoginService() {
+    }
 
-    // instacia unica 
+    // instacia unica
     public static LoginService getInstance() {
         return INSTANCE;
     }
 
-    //Login  
+    // Login
     public void login(Cliente cliente) {
         this.clienteLogado = cliente;
     }
 
-    //Logout 
+    // Logout
     public void logout() {
         this.clienteLogado = null;
     }
 
-    //checa se o cliente está logado
+    // Checa se o cliente está logado
     public boolean estaLogado() {
         return clienteLogado != null;
     }
 
-    //retorna o cliente logado
+    // Retorna o cliente logado
     public Cliente getClienteLogado() {
         return clienteLogado;
     }

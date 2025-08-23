@@ -42,11 +42,4 @@ public class VooController {
         return "redirect:/voos";
     }
 
-    // Excluir um voo
-    @GetMapping("/excluir/{id}")
-    public String excluir(@PathVariable Long id) {
-        service.excluir(id);
-        return "redirect:/voos";
-    }
-
 }
