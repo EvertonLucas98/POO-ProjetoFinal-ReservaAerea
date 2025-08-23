@@ -21,9 +21,13 @@
                     <a href="#">Viagens</a>
                     <a href="#">Sobre</a>
                 </div>
-                <div id="auth-container">
+                <div th:if="${logado == false}" class="auth-container">
                     <a href="/login" class="btn btn-primary me-2">Login</a>
                     <a href="/clientes/novo" class="btn btn-outline-primary">Cadastre-se</a>
+                </div>
+                <div th:if="${logado == true}" class="auth-container" style="background-color: var(--cor4);">
+                    <p>Bem-vindo, <span th:text="${nomeCliente}"></span>!</p>
+                    <a href="/logout" class="btn btn-outline-dark">Sair</a>
                 </div>
             </div>
         </nav>
@@ -46,8 +50,7 @@
             </div>
             <div id="card-interno">
                 <div class="list-group mb-3">
-                    <a href="/voos" class="list-group-item list-group-item-action">Gerenciar Voos</a>
-                    <a href="/clientes" class="list-group-item list-group-item-action">Gerenciar Clientes</a>
+                    <a href="/voos" class="list-group-item list-group-item-action">Lista de Voos</a>
                 </div>
             </div>
         </section>

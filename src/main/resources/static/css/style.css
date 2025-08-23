@@ -15,7 +15,7 @@
     --cor1: #4885bb;
     --cor2: #6F9ABF;
     --cor3: #B0C6D9;
-    --cor4: #cedeff;
+    --cor4: #e3ecff;
     --cor5: #aaa5a0;
 
     --font-logo: "Lobster", sans-serif;
@@ -104,6 +104,12 @@ nav {
 /* Estilo do contêiner de autenticação */
 #auth-container {
     display: flex;
+}
+
+#auth-container>a {
+    font-size: 1em;
+    color: var(--cor4);
+    text-decoration: none;
 }
 
 #card {
