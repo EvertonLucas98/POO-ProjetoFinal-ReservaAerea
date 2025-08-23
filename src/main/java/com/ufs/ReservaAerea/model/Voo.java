@@ -16,8 +16,12 @@ public class Voo {
     private String destino;
     private String dataHora;
 
+    @ManyToOne
+    @JoinColumn(name = "tipo_aviao_id")
+    private TipoAviao tipoAviao;
+
     @OneToMany(mappedBy = "voo", cascade = CascadeType.ALL)
-    private List<Poltrona> poltronas=new ArrayList<>();
+    private List<Poltrona> poltronas = new ArrayList<>();
 
     // Getters e Setters
     public Long getId() {
@@ -58,6 +62,14 @@ public class Voo {
 
     public void setPoltronas(List<Poltrona> poltronas) {
         this.poltronas = poltronas;
+    }
+
+    public TipoAviao getTipoAviao() {
+        return tipoAviao;
+    }
+
+    public void setTipoAviao(TipoAviao tipoAviao) {
+        this.tipoAviao = tipoAviao;
     }
 
 }
