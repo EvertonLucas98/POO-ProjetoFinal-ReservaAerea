@@ -1,2 +1,3 @@
 # POO-ProjetoFinal-ReservaAerea
 O Reserva Aerea é um sistema web desenvolvido em Java com Spring Boot que permite a seleção interativa de poltronas em voos e a confirmação da reserva. A aplicação integra o back-end (responsável por gerenciar voos, poltronas e clientes) com o front-end construído em HTML, CSS e JS.
+O teste JUnite ClienteServiceTeste que consta na pasta src\test\java\com\ufs\ReservaAerea\service garante que a lógica de negócio seja aplicada corretamente, já que a mesma testa e verifica a impossibilidade de um cliente não poder ser criado sem email ou senha, independente do que aconteça no frontend ou no controlador.

@@ -55,4 +55,5 @@ public class ArquivoService {
             System.err.println("Erro ao limpar arquivo " + nomeArquivo + ": " + e.getMessage());
         }
     }
+    
 }

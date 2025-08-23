@@ -105,4 +105,5 @@ public class ReservaService {
         return reservaRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Reserva não encontrada"));
     }
+    
 }

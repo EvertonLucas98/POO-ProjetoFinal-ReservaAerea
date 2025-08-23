@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Minhas Reservas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="container mt-4">
 
     <h2>Minhas Reservas</h2>
-    
+
     <div th:if="${#lists.isEmpty(reservas)}" class="alert alert-info">
         Você não possui reservas.
     </div>
@@ -18,20 +20,19 @@
             <h5 class="card-title">Reserva #<span th:text="${reserva.id}"></span></h5>
             <p><strong>Voo:</strong> <span th:text="${reserva.voo.origem} + ' → ' + ${reserva.voo.destino}"></span></p>
             <p><strong>Data:</strong> <span th:text="${reserva.voo.dataHora}"></span></p>
-            <p><strong>Poltronas:</strong> 
-                <span th:each="poltrona : ${reserva.poltronas}" 
-                      th:text="${poltrona.numero} + ' '"></span>
+            <p><strong>Poltronas:</strong>
+                <span th:each="poltrona : ${reserva.poltronas}" th:text="${poltrona.numero} + ' '"></span>
             </p>
             <p><strong>Preço total:</strong> R$ <span th:text="${reserva.precoTotal}"></span></p>
             <p><strong>Status:</strong> <span th:text="${reserva.status}"></span></p>
             <p><strong>Data da reserva:</strong> <span th:text="${reserva.dataReserva}"></span></p>
-            
+
             <div th:if="${reserva.status == 'CONFIRMADA'}">
                 <form th:action="@{/reservas/} + ${reserva.id} + '/cancelar'" method="post">
                     <button type="submit" class="btn btn-danger btn-sm">Cancelar Reserva</button>
                 </form>
             </div>
-            
+
             <a th:href="@{/reservas/} + ${reserva.id}" class="btn btn-primary btn-sm mt-2">Ver Detalhes</a>
         </div>
     </div>
@@ -42,4 +43,5 @@
     </div>
 
 </body>
+
 </html>
