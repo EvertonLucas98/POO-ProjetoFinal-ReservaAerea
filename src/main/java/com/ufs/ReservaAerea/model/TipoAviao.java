@@ -11,8 +11,6 @@ public abstract class TipoAviao {
     private Long id;
 
     private String modelo;
-    private int totalLinhas;
-    private int totalColunas;
 
     // Getters e Setters
     public Long getId() {
