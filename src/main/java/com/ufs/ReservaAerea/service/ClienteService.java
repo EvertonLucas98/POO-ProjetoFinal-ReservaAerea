@@ -23,10 +23,10 @@ public class ClienteService {
 
     // Salva um cliente no arquivo
     private void salvarClienteNoArquivo(Cliente cliente) {
-        String dadosCliente = cliente.getId() + "|" + 
-                            cliente.getNome() + "|" + 
-                            cliente.getEmail() + "|" + 
-                            cliente.getSenha();
+        String dadosCliente = cliente.getId() + "|" +
+                cliente.getNome() + "|" +
+                cliente.getEmail() + "|" +
+                cliente.getSenha();
         arquivoService.salvarDados(ARQUIVO_CLIENTES, dadosCliente, true);
     }
 
@@ -34,7 +34,7 @@ public class ClienteService {
     private List<String> lerTodosClientesDoArquivo() {
         return arquivoService.lerTodosDados(ARQUIVO_CLIENTES);
     }
-    
+
     // Carrega clientes do arquivo para o banco de dados
     public void carregarClientesDoArquivo() {
         List<String> clientesArquivo = lerTodosClientesDoArquivo();
@@ -49,25 +49,24 @@ public class ClienteService {
                     cliente.setNome(partes[1]);
                     cliente.setEmail(partes[2]);
                     cliente.setSenha(partes[3]);
-                    
+
                     repository.save(cliente);
                 }
             }
         }
     }
 
-     // Limpa e recria o arquivo com os dados atuais do banco
+    // Limpa e recria o arquivo com os dados atuais do banco
     public void recriarArquivoClientes() {
         // Limpa o arquivo
         arquivoService.limparArquivo(ARQUIVO_CLIENTES);
-        
+
         // Recria com dados atuais do banco
         List<Cliente> clientes = repository.findAll();
         for (Cliente cliente : clientes) {
             salvarClienteNoArquivo(cliente);
         }
     }
-
 
     // Listar todos os clientes
     public List<Cliente> listarTodos() {
@@ -76,9 +75,10 @@ public class ClienteService {
 
     // Buscar cliente por ID
     public Cliente buscarPorId(Long id) {
+        // Busca o cliente pelo ID
         Optional<Cliente> clienteEncontrado = repository.findById(id);
 
-        // Verifica se o cliente foi encontrado
+        // Verifica se o cliente foi encontrado, caso contrário exibe uma mensagem de erro
         if (clienteEncontrado.isPresent()) {
             return clienteEncontrado.get();
         } else {
@@ -88,44 +88,48 @@ public class ClienteService {
 
     // Salvar um novo cliente
     public Cliente salvar(Cliente cliente) {
+        // Verifica se já existe um cliente com o mesmo e-mail
         if (repository.existsByEmail(cliente.getEmail())) {
             throw new CredenciaisInvalidasException("Já existe um cliente cadastrado com este e-mail!");
         }
-        if (cliente.getEmail() == null || cliente.getEmail().isBlank() || cliente.getSenha() == null || cliente.getSenha().isBlank()) {
+
+        // Verifica se todos os campos obrigatórios estão preenchidos
+        if (cliente.getEmail() == null || cliente.getEmail().isBlank() || cliente.getSenha() == null
+                || cliente.getSenha().isBlank()) {
             throw new CamposObrigatoriosException("Preencha todos os campos obrigatórios.");
         }
+
+        // Verifica se o formato do email é válido
         if (!cliente.getEmail().matches("^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$")) {
             throw new IllegalArgumentException("Formato de email inválido.");
         }
 
+        // Salva o cliente no banco de dados
         Cliente clienteSalvo = repository.save(cliente);
+        // Salva o cliente no arquivo
         salvarClienteNoArquivo(clienteSalvo);
         return clienteSalvo;
     }
 
     // Autenticar Email e senha
     public Cliente autenticar(String email, String senha) {
-
-    if (email == null || email.isBlank() || senha == null || senha.isBlank()) {
+        // Verifica se os campos estão preenchidos
+        if (email == null || email.isBlank() || senha == null || senha.isBlank()) {
             throw new CamposObrigatoriosException("Preencha todos os campos.");
         }
 
-    if (!email.matches("^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$")) {
-        throw new IllegalArgumentException("Formato de email inválido.");
-    }
-    
-    Cliente cliente = repository.findByEmail(email);
+        // Verifica se o formato do email é válido
+        if (!email.matches("^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$")) {
+            throw new IllegalArgumentException("Formato de email inválido.");
+        }
+
+        // Busca o cliente pelo email
+        Cliente cliente = repository.findByEmail(email);
+        // Verifica se o cliente foi encontrado e se a senha está correta
         if (cliente == null || !cliente.getSenha().equals(senha)) {
             throw new CredenciaisInvalidasException("Email ou senha inválidos.");
         }
-    return cliente;
-}
-    
-    // Excluir um cliente
-    public void excluir(Long id) {
-        repository.deleteById(id);
-        //recria o arquivo sem o cliente excluído
-        recriarArquivoClientes();
+        return cliente;
     }
-    
+
 }

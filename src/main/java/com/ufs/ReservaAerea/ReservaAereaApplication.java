@@ -20,7 +20,8 @@ public class ReservaAereaApplication {
 
     // Carregando dados iniciais
     @Bean
-    CommandLineRunner loadData(VooRepository vooRepository, PoltronaRepository poltronaRepository, ClienteService clienteService) {
+    CommandLineRunner loadData(VooRepository vooRepository, PoltronaRepository poltronaRepository,
+            ClienteService clienteService) {
         return args -> {
             clienteService.carregarClientesDoArquivo();
             // Verificando se já existem dados cadastrados
@@ -49,7 +50,7 @@ public class ReservaAereaApplication {
     // Método para gerar poltronas para um voo
     private void gerarPoltronasParaVoo(Voo voo, PoltronaRepository poltronaRepository) {
         // Gerando um array de colunas
-        String[] colunas = {"A", "B", "C", "D", "E", "F"};
+        String[] colunas = { "A", "B", "C", "D", "E", "F" };
         // Gerando poltronas de A1 a F12
         for (int linha = 1; linha <= 12; linha++) {
             for (int coluna = 0; coluna < colunas.length; coluna++) {
@@ -68,4 +69,3 @@ public class ReservaAereaApplication {
         }
     }
 }
-
