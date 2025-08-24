@@ -19,14 +19,13 @@
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="card-title">Detalhes da Reserva</h5>
-                <p><strong>Voo ID:</strong> <span th:text="${vooId}"></span></p>
+                <p><strong>Voo :</strong> <span th:text="${nomeVoo}"></span></p>
                 <p><strong>Poltronas selecionadas:</strong></p>
                 <ul>
-                    <li th:each="poltronaId : ${poltronasSelecionadas}" 
-                        th:text="'Poltrona ID: ' + ${poltronaId}"></li>
+                    <li th:each="numero : ${numerosPoltronas}" th:text="'Poltrona: ' + ${numero}"></li>
                 </ul>
                 <p><strong>Total de poltronas:</strong> <span th:text="${#lists.size(poltronasSelecionadas)}"></span></p>
-                <p><strong>Preço total:</strong> R$ <span th:text="${#lists.size(poltronasSelecionadas) * 200}"></span></p>
+                <p><strong>Preço total:</strong> R$ <span th:text="${precoTotal}"></span></p>
             </div>
         </div>
 

@@ -9,12 +9,12 @@ import java.util.List;
 public class ArquivoService {
 
     // Salva dados em um arquivo específico
-    public void salvarDados(String nomeArquivo, String dados, boolean append) {
-        try (FileWriter writer = new FileWriter(nomeArquivo, append);
+    public void salvarDados(String nomeArquivo, String dados, boolean append) { 
+        try (FileWriter writer = new FileWriter(nomeArquivo, append); 
                 BufferedWriter bufferedWriter = new BufferedWriter(writer)) {
 
-            bufferedWriter.write(dados);
-            bufferedWriter.newLine();
+            bufferedWriter.write(dados); // Escreve os dados no arquivo
+            bufferedWriter.newLine(); // Adiciona uma nova linha
 
         } catch (IOException e) {
             System.err.println("Erro ao salvar dados em " + nomeArquivo + ": " + e.getMessage());
@@ -22,21 +22,21 @@ public class ArquivoService {
     }
 
     // Lê todos os dados de um arquivo específico
-    public List<String> lerTodosDados(String nomeArquivo) {
-        List<String> dados = new ArrayList<>();
-        File arquivo = new File(nomeArquivo);
+    public List<String> lerTodosDados(String nomeArquivo) { 
+        List<String> dados = new ArrayList<>(); // Lista para armazenar os dados lidos
+        File arquivo = new File(nomeArquivo);  
 
         if (!arquivo.exists()) {
             return dados; // Retorna lista vazia se o arquivo não existir
         }
 
         try (FileReader reader = new FileReader(nomeArquivo);
-                BufferedReader bufferedReader = new BufferedReader(reader)) {
+                BufferedReader bufferedReader = new BufferedReader(reader)) { 
 
             String linha;
-            while ((linha = bufferedReader.readLine()) != null) {
-                if (!linha.trim().isEmpty()) {
-                    dados.add(linha);
+            while ((linha = bufferedReader.readLine()) != null) { // a cada linha do arquivo
+                if (!linha.trim().isEmpty()) { // Ignora linhas vazias
+                    dados.add(linha); // Adiciona a linha à lista de dados
                 }
             }
 
@@ -44,7 +44,7 @@ public class ArquivoService {
             System.err.println("Erro ao ler dados de " + nomeArquivo + ": " + e.getMessage());
         }
 
-        return dados;
+        return dados; //retorna lista de Strings com os dados do arquivo
     }
 
     // Limpa um arquivo específico

@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 
 import com.ufs.ReservaAerea.service.ClienteService;
 import com.ufs.ReservaAerea.service.InicializacaoService;
+import com.ufs.ReservaAerea.service.ReservaService;
 
 @SpringBootApplication
 public class ReservaAereaApplication {
@@ -17,12 +18,14 @@ public class ReservaAereaApplication {
 
     // Carregando dados iniciais
     @Bean
-    CommandLineRunner loadData(ClienteService clienteService, InicializacaoService inicializacaoService) {
+    CommandLineRunner loadData(ClienteService clienteService, InicializacaoService inicializacaoService, ReservaService reservaService) {
         return args -> {
             // Carrega clientes do arquivo (não mudou)
             clienteService.carregarClientesDoArquivo();
             // Chama o novo serviço para carregar voos e poltronas
             inicializacaoService.carregarDadosIniciais();
+            // Carrega reservas do arquivo
+            reservaService.carregarReservasDoArquivo();
         };
     }
 
