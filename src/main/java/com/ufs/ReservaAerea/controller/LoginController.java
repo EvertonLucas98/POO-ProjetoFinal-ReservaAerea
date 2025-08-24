@@ -24,12 +24,12 @@ public class LoginController {
 
     @GetMapping("/login")
     public String mostrarLogin(@RequestParam(name = "vooId", required = false) Long vooId, Model model) {
-        model.addAttribute("vooId", vooId);
+        model.addAttribute("vooId", vooId); //para redirecionar para a pagina de poltronas apos o login
         return "login";
     }
 
     @PostMapping("/login")
-    public String autenticar(@RequestParam("email") String email, @RequestParam("senha") String senha,
+    public String autenticar(@RequestParam("email") String email, @RequestParam("senha") String senha, 
             @RequestParam(name = "vooId", required = false) Long vooId, Model model) {
         try {
             Cliente cliente = clienteService.autenticar(email, senha);

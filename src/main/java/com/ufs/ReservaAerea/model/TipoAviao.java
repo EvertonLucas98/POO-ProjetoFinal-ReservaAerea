@@ -29,8 +29,14 @@ public abstract class TipoAviao {
         this.modelo = modelo;
     }
 
+    public double getPrecoBase() {
+        return 200; // Preço base fixo para todos os tipos de avião
+    }
+
     // Métodos abstratos para obter as dimensões do avião
     public abstract int getTotalLinhas();
     public abstract int getTotalColunas();
+    
+
 
 }

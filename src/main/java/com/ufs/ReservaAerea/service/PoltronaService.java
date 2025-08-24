@@ -23,6 +23,10 @@ public class PoltronaService {
     public List<Poltrona> listarPorVoo(Long vooId) {
         return repository.findByVoo_Id(vooId);
     }
+    // Busca poltronas por uma lista de IDs
+    public List<Poltrona> buscarPoltronasPorIds(List<Long> poltronaIds) {
+    return repository.findAllById(poltronaIds);
+}
 
     // Reserva uma poltrona
     @Transactional

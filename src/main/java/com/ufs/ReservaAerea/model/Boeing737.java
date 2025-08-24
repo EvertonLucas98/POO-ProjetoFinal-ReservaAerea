@@ -18,4 +18,8 @@ public class Boeing737 extends TipoAviao {
     public int getTotalColunas() {
         return 6;
     }
+    @Override
+    public double getPrecoBase() {
+        return 220; // Preço base específico para Boeing 737
+    }
 }

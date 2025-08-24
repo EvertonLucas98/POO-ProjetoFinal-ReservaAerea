@@ -23,11 +23,11 @@ public class ClienteService {
 
     // Salva um cliente no arquivo
     private void salvarClienteNoArquivo(Cliente cliente) {
-        String dadosCliente = cliente.getId() + "|" +
+        String dadosCliente = cliente.getId() + "|" + //salva separado por |
                 cliente.getNome() + "|" +
                 cliente.getEmail() + "|" +
                 cliente.getSenha();
-        arquivoService.salvarDados(ARQUIVO_CLIENTES, dadosCliente, true);
+        arquivoService.salvarDados(ARQUIVO_CLIENTES, dadosCliente, true); 
     }
 
     // Lê todos os clientes do arquivo
@@ -37,20 +37,20 @@ public class ClienteService {
 
     // Carrega clientes do arquivo para o banco de dados
     public void carregarClientesDoArquivo() {
-        List<String> clientesArquivo = lerTodosClientesDoArquivo();
-        for (String linha : clientesArquivo) {
-            String[] partes = linha.split("\\|");
+        List<String> clientesArquivo = lerTodosClientesDoArquivo(); //lista de strings, cada string é uma linha do arquivo
+        for (String linha : clientesArquivo) {           //para cada linha do arquivo
+            String[] partes = linha.split("\\|");  //separa usando |
             if (partes.length >= 4) {
                 // Verifica se o cliente já existe no banco
-                Long id = Long.parseLong(partes[0]);
-                if (!repository.existsById(id)) {
-                    Cliente cliente = new Cliente();
+                Long id = Long.parseLong(partes[0]);   
+                if (!repository.existsById(id)) {  //se nao existe 
+                    Cliente cliente = new Cliente(); //cria novo cliente
                     cliente.setId(id);
                     cliente.setNome(partes[1]);
                     cliente.setEmail(partes[2]);
                     cliente.setSenha(partes[3]);
 
-                    repository.save(cliente);
+                    repository.save(cliente); //salva no banco
                 }
             }
         }
@@ -62,21 +62,21 @@ public class ClienteService {
         arquivoService.limparArquivo(ARQUIVO_CLIENTES);
 
         // Recria com dados atuais do banco
-        List<Cliente> clientes = repository.findAll();
+        List<Cliente> clientes = repository.findAll(); //busca todos os clientes do banco
         for (Cliente cliente : clientes) {
-            salvarClienteNoArquivo(cliente);
+            salvarClienteNoArquivo(cliente); //para cada cliente, salva no arquivo
         }
     }
 
     // Listar todos os clientes
     public List<Cliente> listarTodos() {
-        return repository.findAll();
+        return repository.findAll();  
     }
 
     // Buscar cliente por ID
     public Cliente buscarPorId(Long id) {
         // Busca o cliente pelo ID
-        Optional<Cliente> clienteEncontrado = repository.findById(id);
+        Optional<Cliente> clienteEncontrado = repository.findById(id); 
 
         // Verifica se o cliente foi encontrado, caso contrário exibe uma mensagem de erro
         if (clienteEncontrado.isPresent()) {
