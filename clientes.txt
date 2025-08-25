@@ -2,5 +2,4 @@
 2|Lila|lilabemerguy@gmail.com|1234
 3|Dassu|dassu@gmail.com|oioi
 4|Jorge|jorgejorge@gmail.com|jorge
-5|Dijalma|dija@gmail.com|1
 6|Everton|evertonlukas8@gmail.com|1
